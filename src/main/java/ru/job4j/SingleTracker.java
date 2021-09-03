@@ -3,6 +3,8 @@ package ru.job4j;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.List;
+
 /**
  * @author Evgenii Shegai
  * @since 03.09.2021
@@ -34,11 +36,11 @@ public final class SingleTracker {
         return tracker.findById(id);
     }
 
-    public Item[] findByName(String name) {
+    public List<Item> findByName(String name) {
         return tracker.findByName(name);
     }
 
-    public Item[] findAll() {
+    public List<Item> findAll() {
         return tracker.findAll();
     }
 
