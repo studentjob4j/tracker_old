@@ -25,7 +25,7 @@ public class PhoneDictionary {
         Predicate<Person> four = x -> x.getPhone().equals(key);
         Predicate<Person> combine = one.or(two.or(three.or(four)));
         ArrayList<Person> result = new ArrayList<>();
-        for (Person person : persons) {
+        for (var person : persons) {
             if (combine.test(person)) {
                 result.add(person);
             }
