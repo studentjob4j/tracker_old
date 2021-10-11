@@ -7,9 +7,10 @@ import java.util.List;
  * @author Evgenii Shegai
  * @since 31.08.2021
  * @version 1.0
+ * Этот вариант трекера хранит данные в листе
  */
 
-public class Tracker {
+public class MemTracker implements Store {
 
     private final List<Item> list = new ArrayList<>();
     private int ids = 1;
@@ -25,6 +26,12 @@ public class Tracker {
         return index != -1 ? list.get(index) : null;
     }
 
+    @Override
+    public void init() {
+
+    }
+
+    @Override
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         for (Item temp : list) {
@@ -35,6 +42,7 @@ public class Tracker {
         return result;
     }
 
+    @Override
     public List<Item> findAll() {
         return list;
     }
@@ -51,6 +59,7 @@ public class Tracker {
         return rsl;
     }
 
+    @Override
     public boolean replace(int id, Item item) {
         int index = indexOf(id);
         if (index != -1) {
@@ -60,6 +69,7 @@ public class Tracker {
         return index != -1;
     }
 
+    @Override
     public boolean delete(int id) {
         boolean result = false;
         int temp = indexOf(id);
@@ -70,4 +80,9 @@ public class Tracker {
         return result;
     }
 
+
+    @Override
+    public void close() throws Exception {
+
+    }
 }
