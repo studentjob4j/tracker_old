@@ -17,7 +17,7 @@ public class TrackerTest {
 
     @Test
     public void whenTestFindById() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item bug = new Item(1);
         Item item = tracker.add(bug);
         Item result = tracker.findById(item.getId());
@@ -26,7 +26,7 @@ public class TrackerTest {
 
     @Test
     public void whenTestFindAll() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item(1);
         Item second = new Item(2);
         tracker.add(first);
@@ -37,7 +37,7 @@ public class TrackerTest {
 
     @Test
     public void whenTestFindByNameCheckArrayLength() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item(1, "First");
         Item second = new Item(2, "second");
         tracker.add(first);
@@ -51,7 +51,7 @@ public class TrackerTest {
 
     @Test
     public void whenTestFindByNameCheckSecondItemName() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item(1, "First");
         Item second = new Item(2, "Second");
         tracker.add(first);
@@ -65,7 +65,7 @@ public class TrackerTest {
 
     @Test
     public void whenReplace() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item(1, "First");
         Item second = new Item(2, "Second");
         tracker.add(first);
@@ -75,7 +75,7 @@ public class TrackerTest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = new Tracker();
+        MemTracker tracker = new MemTracker();
         Item first = new Item(1, "First");
         Item second = new Item(2, "Second");
         tracker.add(first);
