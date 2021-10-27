@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Evgenii Shegai
  * @since 31.08.2021
@@ -8,16 +11,16 @@ package ru.job4j.tracker;
 
 public class StubInput implements Input {
 
-    private String[] answers;
+    private List<String> list = new ArrayList<>();
     private int position = 0;
 
-    public StubInput(String[] answers) {
-        this.answers = answers;
+    public StubInput(List<String> answers) {
+        this.list = answers;
     }
 
     @Override
     public String askStr(String question) {
-        return answers[position++];
+        return list.get(position++);
     }
 
     @Override

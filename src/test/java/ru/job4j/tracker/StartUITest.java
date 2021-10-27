@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.core.Is.is;
@@ -18,9 +19,11 @@ public class StartUITest {
     @Test
     public void whenCreateItem() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"0", "Item name", "1"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("0");
+        list.add("Item name");
+        list.add("1");
+        Input in = new StubInput(list);
         MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new CreateAction(out),
@@ -39,9 +42,12 @@ public class StartUITest {
         MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Replaced item"));
         String replacedName = "New item name";
-        Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), replacedName,  "1"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("0");
+        list.add(String.valueOf(item.getId()));
+        list.add(replacedName);
+        list.add("1");
+        Input in = new StubInput(list);
         List<UserAction> actions = List.of(
                 new EditItemAction(out),
                 new ExitAction(out));
@@ -59,9 +65,11 @@ public class StartUITest {
         Output out = new StubOutput();
         MemTracker tracker = new MemTracker();
         Item item = tracker.add(new Item("Deleted item"));
-        Input in = new StubInput(
-                new String[] {"0", String.valueOf(item.getId()), "1"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("0");
+        list.add(String.valueOf(item.getId()));
+        list.add("1");
+        Input in = new StubInput(list);
         List<UserAction> actions = List.of(
                 new DeleteItemAction(out),
                 new ExitAction(out));
@@ -77,9 +85,9 @@ public class StartUITest {
     @Test
     public void whenExit() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"0"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("0");
+        Input in = new StubInput(list);
         MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new ExitAction(out));
@@ -93,9 +101,10 @@ public class StartUITest {
     @Test
     public void whenInvalidExit() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {String.valueOf(-1), String.valueOf(0)}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("-1");
+        list.add("0");
+        Input in = new StubInput(list);
         MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new ExitAction(out));

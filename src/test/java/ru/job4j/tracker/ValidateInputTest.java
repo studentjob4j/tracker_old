@@ -1,6 +1,10 @@
 package ru.job4j.tracker;
 
 import org.junit.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -15,9 +19,10 @@ public class ValidateInputTest {
     @Test
     public void whenInvalidInput() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"one", "1"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("one");
+        list.add("1");
+        Input in = new StubInput(list);
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected, is(1));
@@ -26,9 +31,9 @@ public class ValidateInputTest {
     @Test
     public void whenValidInput() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"1"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        Input in = new StubInput(list);
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected, is(1));
@@ -37,9 +42,11 @@ public class ValidateInputTest {
     @Test
     public void whenManyValidInput() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"1", "2", "3"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        Input in = new StubInput(list);
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected, is(1));
@@ -52,9 +59,9 @@ public class ValidateInputTest {
     @Test
     public void whenNegativeInput() {
         Output out = new StubOutput();
-        Input in = new StubInput(
-                new String[] {"-1"}
-        );
+        List<String> list = new ArrayList<>();
+        list.add("-1");
+        Input in = new StubInput(list);
         ValidateInput input = new ValidateInput(out, in);
         int selected = input.askInt("Enter menu:");
         assertThat(selected, is(-1));
