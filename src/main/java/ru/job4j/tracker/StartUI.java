@@ -43,7 +43,7 @@ public class StartUI {
         MemTracker tracker = new MemTracker();
         List<UserAction> actions = List.of(
                 new CreateAction(out), new ShowAllAction(), new EditItemAction(out), new DeleteItemAction(out),
-                new FindByIdAction(), new FindByNameAction(), new ExitAction(out));
+                new FindByIdAction(out), new FindByNameAction(out), new ExitAction(out));
 
         new StartUI(out).init(input, tracker, actions);
     }
