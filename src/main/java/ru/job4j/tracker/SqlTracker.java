@@ -42,8 +42,8 @@ public class SqlTracker implements Store {
 
     public void createTable(String tableName) {
         try (Statement statement = connection.createStatement()) {
-            String temp = String.format("create table %s (%s, %s, %s);",
-                    tableName, "id serial primary key", "name text", "created TIMESTAMP");
+            String temp = String.format("create table %s (%s, %s);",
+                    tableName, "id serial primary key", "name text");
             statement.execute(temp);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -71,11 +71,9 @@ public class SqlTracker implements Store {
     @Override
     public Item add(Item item) {
             try (PreparedStatement statement =
-                    connection.prepareStatement("insert into items(name, created) values (?, ?)",
+                    connection.prepareStatement("insert into items(name) values (?)",
                     Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, item.getName());
-            Timestamp timestamp = Timestamp.valueOf(item.getCreated());
-            statement.setTimestamp(2, timestamp);
             statement.execute();
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
@@ -125,7 +123,6 @@ public class SqlTracker implements Store {
                 Item temp = new Item();
                 temp.setName((resultSet.getString("name")));
                 temp.setId(resultSet.getInt("id"));
-                temp.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
                 result.add(temp);
             }
         } catch (Exception e) {
@@ -145,7 +142,6 @@ public class SqlTracker implements Store {
                 while (resultSet.next()) {
                     temp.setName(resultSet.getString("name"));
                     temp.setId(resultSet.getInt("id"));
-                    temp.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
                     result.add(temp);
                 }
             } catch (SQLException e) {
@@ -164,7 +160,6 @@ public class SqlTracker implements Store {
                 while (resultSet.next()) {
                     result.setName(resultSet.getString("name"));
                     result.setId(resultSet.getInt("id"));
-                    result.setCreated(resultSet.getTimestamp("created").toLocalDateTime());
                 }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

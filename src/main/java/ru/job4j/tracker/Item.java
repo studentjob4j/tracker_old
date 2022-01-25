@@ -1,21 +1,24 @@
 package ru.job4j.tracker;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import javax.persistence.*;
 import java.util.Objects;
 
 /**
  * @author Evgenii Shegai
  * @since 31.08.2021
- * @version 1.0
+ * @version 2.0
+ * Конфигурация Hibernate
  */
 
+@Entity
+@Table(name = "items")
 public class Item {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String name;
-    private LocalDateTime created = LocalDateTime.now();
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
 
     public Item() {
     }
@@ -49,14 +52,6 @@ public class Item {
         this.name = name;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -67,18 +62,16 @@ public class Item {
         }
         Item item = (Item) o;
         return id == item.id
-                && Objects.equals(name, item.name)
-                && Objects.equals(created.withNano(0), item.created.withNano(0));
+                && Objects.equals(name, item.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, created);
+        return Objects.hash(id, name);
     }
 
     @Override
     public String toString() {
-        return String.format("id: %s, name: %s, created: %s", id, name, FORMATTER.format(created));
+        return String.format("id: %s, name: %s, ", id, name);
     }
-
 }
