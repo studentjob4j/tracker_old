@@ -80,7 +80,6 @@ public class MemTracker implements Store {
         return result;
     }
 
-
     @Override
     public void close() throws Exception {
 
